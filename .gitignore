@@ -1,0 +1,8 @@
+# BuildTools
+.coursier
+out
+
+# Editors
+.metals
+.vscode
+.bloop
