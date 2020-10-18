@@ -3,11 +3,13 @@ package com.karfroth.scalackage
 import scala.util.Try
 import scala.io.Source
 
+import com.karfroth.scalackage.mill.MillBuildData
+
 object Scalackage {
     def main(args: Array[String]): Unit = {
         for {
-            packageJson <- Try(Source.fromFile("package.json").getLines().mkString("\n")).toOption
-            buildData <- BuildData.fromJson(packageJson)
+            packageJson <- Option("{}")
+            buildData <- MillBuildData.fromJson(packageJson)
         } yield (println(buildData))
     }
 }

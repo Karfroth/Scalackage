@@ -6,3 +6,10 @@ out
 .metals
 .vscode
 .bloop
+
+# dependencies
+node_modules
+
+# files for development
+package.json
+yarn.lock

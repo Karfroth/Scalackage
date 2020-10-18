@@ -1,22 +1,17 @@
-package com.karfroth.scalackage
+package com.karfroth.scalackage.mill
 
-sealed trait DataTypes
-final case class ScalaVersion(version: String) extends DataTypes
-final case class ScalaJSVersion(version: String) extends DataTypes
-final case class Dependency(groupId: String, artifactId: String, version: String) extends DataTypes
-
-final case class BuildData(
+final case class MillBuildData(
     scalaVersion: ScalaVersion
 ,   scalaJSVersion: ScalaJSVersion
 ,   dependencies: Seq[Dependency]
 )
 
-object BuildData {
-    def fromJson(input: String): Option[BuildData] = {
+object MillBuildData {
+    def fromJson(input: String): Option[MillBuildData] = {
         val json = ujson.read(input)
         val buildDataJson = json("scalackage").objOpt
         buildDataJson.map{ data => 
-            BuildData(
+            MillBuildData(
                 scalaVersion   = ScalaVersion(data.get("scalaVersion").map(_.str).getOrElse("2.13.3"))
             ,   scalaJSVersion = ScalaJSVersion(data.get("scalaJSVersion").map(_.str).getOrElse("1.2.0"))
             ,   dependencies   = Seq()
